@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservice.TaskManagement
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservice.TaskManagement.Application", "Microservice.TaskManagement.Application\Microservice.TaskManagement.Application.csproj", "{6FEF897A-6A67-418C-98D7-8518C54792EF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microservice.TaskManagement.Infrastructure", "Microservice.TaskManagement.Infrastructure\Microservice.TaskManagement.Infrastructure.csproj", "{A68C896B-8651-4E24-9122-56A958E9275B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{6FEF897A-6A67-418C-98D7-8518C54792EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FEF897A-6A67-418C-98D7-8518C54792EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6FEF897A-6A67-418C-98D7-8518C54792EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A68C896B-8651-4E24-9122-56A958E9275B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A68C896B-8651-4E24-9122-56A958E9275B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A68C896B-8651-4E24-9122-56A958E9275B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A68C896B-8651-4E24-9122-56A958E9275B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,6 +50,7 @@ Global
 		{4CA9F5BB-6A86-4AA1-BFE6-E36149187DBC} = {AC93C10C-62DC-4FF8-A046-255780D126DA}
 		{2B8FCF84-2C43-40C2-B96C-DA446F995006} = {AC93C10C-62DC-4FF8-A046-255780D126DA}
 		{6FEF897A-6A67-418C-98D7-8518C54792EF} = {AC93C10C-62DC-4FF8-A046-255780D126DA}
+		{A68C896B-8651-4E24-9122-56A958E9275B} = {AC93C10C-62DC-4FF8-A046-255780D126DA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9DD36B82-7DFC-4BCD-9655-96F09D75A64C}
