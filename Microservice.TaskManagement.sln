@@ -9,9 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservice.TaskManagement
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservice.TaskManagement.Domain", "Microservice.TaskManagement.Domain\Microservice.TaskManagement.Domain.csproj", "{4CA9F5BB-6A86-4AA1-BFE6-E36149187DBC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservice.TaskManagement.Infrastructure", "MicroService.TaskManaGement.Infrastructure\Microservice.TaskManagement.Infrastructure.csproj", "{27A9A3B1-2FA7-4782-B260-FBB77D058489}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservice.TaskManagement.Infrastructure", "MicroService.TaskManagement.Infrastructure\Microservice.TaskManagement.Infrastructure.csproj", "{27A9A3B1-2FA7-4782-B260-FBB77D058489}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microservice.TaskManagement.Persistence", "Microservice.TaskManager.Persistence\Microservice.TaskManagement.Persistence.csproj", "{2B8FCF84-2C43-40C2-B96C-DA446F995006}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microservice.TaskManagement.Persistence", "Microservice.TaskManagement.Persistence\Microservice.TaskManagement.Persistence.csproj", "{2B8FCF84-2C43-40C2-B96C-DA446F995006}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microservice.TaskManagement.Application", "Microservice.TaskManagement.Application\Microservice.TaskManagement.Application.csproj", "{6FEF897A-6A67-418C-98D7-8518C54792EF}"
 EndProject
