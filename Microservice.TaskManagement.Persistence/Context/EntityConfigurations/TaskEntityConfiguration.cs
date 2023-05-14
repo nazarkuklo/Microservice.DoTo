@@ -13,7 +13,7 @@ namespace Microservice.TaskManagement.Persistence.Context.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<TaskEntity> builder)
         {
-            builder.Property(p => p.Id).ValueGeneratedOnAdd();
+
         }
     }
 }

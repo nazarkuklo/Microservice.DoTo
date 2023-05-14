@@ -17,18 +17,12 @@ namespace Microservice.TaskManagement.Persistence.Context
 
         public TaskManagementContext(DbContextOptions<TaskManagementContext> options) : base(options)
         {
-            Database.EnsureCreated();
+            Database.Migrate();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            modelBuilder.Entity<TaskEntity>().Property(p => p.Id).ValueGeneratedOnAdd();
-            modelBuilder.Entity<TagEntity>().Property(p => p.Id).ValueGeneratedOnAdd();
-            modelBuilder.Entity<StatusEntity>().Property(p => p.Id).ValueGeneratedOnAdd();
-
-            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
     }
 }

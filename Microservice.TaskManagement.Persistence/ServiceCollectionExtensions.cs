@@ -27,7 +27,7 @@ namespace Microservice.TaskManagement.Persistence
             var postgreSqlDbConnection = configuration.GetSection("DbConnection").Value;
             if (postgreSqlDbConnection is null) throw new ArgumentNullException(nameof(postgreSqlDbConnection));
 
-            services.AddEntityFrameworkNpgsql().AddDbContext<TaskManagementContext>(builder =>
+            services.AddDbContext<TaskManagementContext>(builder =>
                 builder.UseNpgsql(postgreSqlDbConnection, optionsBuilder =>
                 {
                     optionsBuilder.EnableRetryOnFailure();
