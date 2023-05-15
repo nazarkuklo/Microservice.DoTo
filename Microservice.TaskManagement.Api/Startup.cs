@@ -1,4 +1,5 @@
 using Microservice.TaskManagement.Persistence;
+using Microservice.TaskManagement.Persistence.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -44,6 +45,8 @@ namespace Microservice.TaskManagement.Api
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Microservice.TaskManagement.Api v1"));
             }
+
+            app.UseAutoMigrateDatabase<TaskManagementContext>();
 
             app.UseHttpsRedirection();
 

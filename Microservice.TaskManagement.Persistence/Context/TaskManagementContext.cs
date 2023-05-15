@@ -17,7 +17,7 @@ namespace Microservice.TaskManagement.Persistence.Context
 
         public TaskManagementContext(DbContextOptions<TaskManagementContext> options) : base(options)
         {
-            Database.Migrate();
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

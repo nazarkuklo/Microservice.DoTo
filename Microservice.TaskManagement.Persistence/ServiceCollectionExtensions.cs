@@ -1,4 +1,5 @@
 ﻿using Microservice.TaskManagement.Persistence.Context;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -35,6 +36,16 @@ namespace Microservice.TaskManagement.Persistence
             );
 
             return services;
+        }
+
+        public static IApplicationBuilder UseAutoMigrateDatabase<TDbContext>(this IApplicationBuilder builder)
+    where TDbContext : DbContext
+        {
+            using var serviceScope =
+                builder.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope();
+            serviceScope.ServiceProvider.GetService<TDbContext>()?.Database.Migrate();
+
+            return builder;
         }
 
         #endregion
