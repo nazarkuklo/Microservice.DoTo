@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Microservice.TaskManagement.Application\Microservice.TaskManagement.Application.csproj" />
     <ProjectReference Include="..\Microservice.TaskManagement.Domain\Microservice.TaskManagement.Domain.csproj" />
   </ItemGroup>
 
