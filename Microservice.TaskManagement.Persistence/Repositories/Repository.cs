@@ -21,9 +21,9 @@ namespace Microservice.TaskManagement.Persistence.Repositories
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public Task<List<TEntity>> GetAllAsync()
+        public async Task<List<TEntity>> GetAllAsync()
         {
-           return Task.FromResult(_context.Set<TEntity>().ToList());
+            return await _context.Set<TEntity>().ToListAsync();
         }
 
         public async Task<TEntity> GetByIdAsync(int Id)
@@ -31,11 +31,11 @@ namespace Microservice.TaskManagement.Persistence.Repositories
             return await _context.Set<TEntity>().FirstOrDefaultAsync(x => x.Id == Id);
         }
 
-        public async Task<int> AddAsync(TEntity entity)
+        public async Task<TEntity> AddAsync(TEntity entity)
         {
             await _context.Set<TEntity>().AddAsync(entity);
 
-            return entity.Id;
+            return entity;
         }
 
         public Task UpdateAsync(TEntity entity)

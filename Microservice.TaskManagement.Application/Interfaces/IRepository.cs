@@ -11,7 +11,7 @@ namespace Microservice.TaskManagement.Persistence.Interfaces
     {
         public Task<TEntity> GetByIdAsync(int Id);
         Task<List<TEntity>> GetAllAsync();
-        Task<int> AddAsync(TEntity entity);
+        Task<TEntity> AddAsync(TEntity entity);
         Task UpdateAsync(TEntity entity);
         Task RemoveAsync(int id);
     }
