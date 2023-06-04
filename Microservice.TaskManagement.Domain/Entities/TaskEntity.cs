@@ -12,6 +12,8 @@ namespace Microservice.TaskManagement.Domain.Entities
         public string Description { get; set; }
         public int AssignedToUserId { get; set; }
         public List<TagEntity> Tags { get; set; }
+        public List<TagEntityTaskEntity> TagEntityTaskEntities { get; set; }
+        public int? StatusId { get; set; }
         public StatusEntity Status { get; set; }
 
     }

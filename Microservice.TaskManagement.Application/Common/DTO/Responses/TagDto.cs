@@ -4,15 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Microservice.TaskManagement.Domain.Entities
+namespace Microservice.TaskManagement.Application.Common.DTO.Responses
 {
-    public class TagEntity : BaseEntity<int>
+    public class TagDto : BaseDto<int>
     {
         public string Name { get; set; }
         public string Description { get; set; }
         public string Color { get; set; }
-        public List<TaskEntity> Tasks { get; set; }
-        public List<TagEntityTaskEntity> TagEntityTaskEntities { get; set; }
-
     }
 }

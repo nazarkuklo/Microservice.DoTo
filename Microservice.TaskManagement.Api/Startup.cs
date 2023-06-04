@@ -1,3 +1,4 @@
+using MediatR;
 using Microservice.TaskManagement.Persistence;
 using Microservice.TaskManagement.Persistence.Context;
 using Microsoft.AspNetCore.Builder;
@@ -12,6 +13,7 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace Microservice.TaskManagement.Api
@@ -28,6 +30,8 @@ namespace Microservice.TaskManagement.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddInfrastructureServices();
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -47,6 +51,7 @@ namespace Microservice.TaskManagement.Api
             }
 
             app.UseAutoMigrateDatabase<TaskManagementContext>();
+
 
             app.UseHttpsRedirection();
 
