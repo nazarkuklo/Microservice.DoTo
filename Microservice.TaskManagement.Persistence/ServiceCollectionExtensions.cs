@@ -1,4 +1,7 @@
-﻿using Microservice.TaskManagement.Persistence.Context;
+﻿using Microservice.TaskManagement.Domain.Entities;
+using Microservice.TaskManagement.Persistence.Context;
+using Microservice.TaskManagement.Persistence.Interfaces;
+using Microservice.TaskManagement.Persistence.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -16,6 +19,7 @@ namespace Microservice.TaskManagement.Persistence
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services)
         {
             services.AddPostgres();
+            services.AddRepositories();
             return services;
         }
 
@@ -35,6 +39,14 @@ namespace Microservice.TaskManagement.Persistence
                 })
             );
 
+            return services;
+        }
+
+        public static IServiceCollection AddRepositories(this IServiceCollection services)
+        {
+            services.AddScoped<IRepository<TaskEntity>, Repository<TaskEntity, TaskManagementContext>>();
+            services.AddScoped<IRepository<StatusEntity>, Repository<StatusEntity, TaskManagementContext>>();
+            services.AddScoped<IRepository<TagEntity>, Repository<TagEntity, TaskManagementContext>>();
             return services;
         }
 

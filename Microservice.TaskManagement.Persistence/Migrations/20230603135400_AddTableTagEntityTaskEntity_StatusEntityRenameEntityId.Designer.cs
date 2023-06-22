@@ -4,15 +4,17 @@ using System.Collections.Generic;
 using Microservice.TaskManagement.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Microservice.TaskManagement.Persistence.Migrations
 {
     [DbContext(typeof(TaskManagementContext))]
-    partial class TaskManagementContextModelSnapshot : ModelSnapshot
+    [Migration("20230603135400_AddTableTagEntityTaskEntity_StatusEntityRenameEntityId")]
+    partial class AddTableTagEntityTaskEntity_StatusEntityRenameEntityId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,7 +32,7 @@ namespace Microservice.TaskManagement.Persistence.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2023, 6, 4, 12, 31, 18, 39, DateTimeKind.Local).AddTicks(2854));
+                        .HasDefaultValue(new DateTime(2023, 6, 3, 16, 54, 0, 256, DateTimeKind.Local).AddTicks(5508));
 
                     b.Property<int>("CreatedUserId")
                         .HasColumnType("integer");
@@ -65,7 +67,7 @@ namespace Microservice.TaskManagement.Persistence.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2023, 6, 4, 12, 31, 18, 35, DateTimeKind.Local).AddTicks(3687));
+                        .HasDefaultValue(new DateTime(2023, 6, 3, 16, 54, 0, 253, DateTimeKind.Local).AddTicks(5154));
 
                     b.Property<int>("CreatedUserId")
                         .HasColumnType("integer");
@@ -89,13 +91,20 @@ namespace Microservice.TaskManagement.Persistence.Migrations
 
             modelBuilder.Entity("Microservice.TaskManagement.Domain.Entities.TagEntityTaskEntity", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
                     b.Property<int>("TagId")
                         .HasColumnType("integer");
 
                     b.Property<int>("TaskId")
                         .HasColumnType("integer");
 
-                    b.HasKey("TagId", "TaskId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("TagId");
 
                     b.HasIndex("TaskId");
 
@@ -115,7 +124,7 @@ namespace Microservice.TaskManagement.Persistence.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2023, 6, 4, 12, 31, 18, 39, DateTimeKind.Local).AddTicks(3562));
+                        .HasDefaultValue(new DateTime(2023, 6, 3, 16, 54, 0, 256, DateTimeKind.Local).AddTicks(6256));
 
                     b.Property<int>("CreatedUserId")
                         .HasColumnType("integer");
@@ -129,7 +138,7 @@ namespace Microservice.TaskManagement.Persistence.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<int?>("StatusId")
+                    b.Property<int>("StatusId")
                         .HasColumnType("integer");
 
                     b.Property<DateTime?>("UpdatedAt")
@@ -165,7 +174,9 @@ namespace Microservice.TaskManagement.Persistence.Migrations
                 {
                     b.HasOne("Microservice.TaskManagement.Domain.Entities.StatusEntity", "Status")
                         .WithMany("Tasks")
-                        .HasForeignKey("StatusId");
+                        .HasForeignKey("StatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Status");
                 });
