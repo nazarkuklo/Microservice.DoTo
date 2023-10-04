@@ -1,4 +1,5 @@
-﻿using Microservice.TaskManagement.Domain.Entities;
+﻿using Microservice.TaskManagement.Application.Interfaces;
+using Microservice.TaskManagement.Domain.Entities;
 using Microservice.TaskManagement.Persistence.Context;
 using Microservice.TaskManagement.Persistence.Interfaces;
 using Microservice.TaskManagement.Persistence.Repositories;
@@ -44,9 +45,10 @@ namespace Microservice.TaskManagement.Persistence
 
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
-            services.AddScoped<IRepository<TaskEntity>, Repository<TaskEntity, TaskManagementContext>>();
-            services.AddScoped<IRepository<StatusEntity>, Repository<StatusEntity, TaskManagementContext>>();
-            services.AddScoped<IRepository<TagEntity>, Repository<TagEntity, TaskManagementContext>>();
+            services.AddScoped<ITaskRepository, TaskRepository>();
+            services.AddScoped<IStatusRepository, StatusRepository>();
+            services.AddScoped<ITagRepository, TagRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork<TaskManagementContext>>();
             return services;
         }
 

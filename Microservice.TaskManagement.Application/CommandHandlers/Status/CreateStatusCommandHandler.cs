@@ -14,17 +14,18 @@ namespace Microservice.TaskManagement.Application.CommandHandlers.Status
 {
     public class CreateStatusCommandHandler : ICommandHandler<CreateStatusCommand, CreateStatusCommand>
     {
-        private readonly IRepository<StatusEntity> _repository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        public CreateStatusCommandHandler(IRepository<StatusEntity> repository, IMapper mapper)
+        public CreateStatusCommandHandler(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            _repository = repository;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
         public async Task<CreateStatusCommand> Handle(CreateStatusCommand request, CancellationToken cancellationToken)
         {
             var entity = _mapper.Map<StatusEntity>(request);
-            var entityResult = await _repository.AddAsync(entity);
+            var entityResult = await _unitOfWork.Statuses.AddAsync(entity);
+            await _unitOfWork.SaveChangesAsync();
             var result = _mapper.Map<CreateStatusCommand>(entityResult);
             return result;
         }
