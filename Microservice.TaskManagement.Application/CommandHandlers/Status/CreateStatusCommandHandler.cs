@@ -24,10 +24,9 @@ namespace Microservice.TaskManagement.Application.CommandHandlers.Status
         public async Task<CreateStatusCommand> Handle(CreateStatusCommand request, CancellationToken cancellationToken)
         {
             var entity = _mapper.Map<StatusEntity>(request);
-            var entityResult = await _unitOfWork.Statuses.AddAsync(entity);
+            var result = await _unitOfWork.StatusRepository.AddAsync(entity);
             await _unitOfWork.SaveChangesAsync();
-            var result = _mapper.Map<CreateStatusCommand>(entityResult);
-            return result;
+            return _mapper.Map<CreateStatusCommand>(result);
         }
     }
 }

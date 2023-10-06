@@ -24,7 +24,7 @@ namespace Microservice.TaskManagement.Application.CommandHandlers.Task
         public async Task<CreateTaskCommand> Handle(CreateTaskCommand request, CancellationToken cancellationToken)
         {
             var entity = _mapper.Map<TaskEntity>(request);
-            var entityResult = await _unitOfWork.Tasks.AddAsync(entity);
+            var entityResult = await _unitOfWork.TaskRepository.AddAsync(entity);
             if (request.Tags.Count > 0)
             {
                 List<TagEntityTaskEntity> list = new List<TagEntityTaskEntity>();
@@ -32,7 +32,7 @@ namespace Microservice.TaskManagement.Application.CommandHandlers.Task
                 {
                     list.Add(new TagEntityTaskEntity() { TagId = tag.Value, TaskId = entityResult.Id });
                 }
-                await _unitOfWork.Tasks.AddRangeAsync(list);
+                await _unitOfWork.TaskRepository.AddRangeAsync(list);
             }
 
             await _unitOfWork.SaveChangesAsync();

@@ -24,7 +24,7 @@ namespace Microservice.TaskManagement.Application.CommandHandlers.Tag
         public async Task<CreateTagCommand> Handle(CreateTagCommand request, CancellationToken cancellationToken)
         {
             var entity = _mapper.Map<TagEntity>(request);
-            var entityResult = await _unitOfWork.Tags.AddAsync(entity);
+            var entityResult = await _unitOfWork.TagRepository.AddAsync(entity);
             await _unitOfWork.SaveChangesAsync();
             var result = _mapper.Map<CreateTagCommand>(entityResult);
             return result;

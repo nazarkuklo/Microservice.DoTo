@@ -14,18 +14,18 @@ namespace Microservice.TaskManagement.Persistence.Repositories
     public class UnitOfWork<TContext> : IUnitOfWork where TContext : DbContext
     {
         private readonly TContext _context;
-        public ITaskRepository Tasks { get; }
+        public ITaskRepository TaskRepository { get; }
 
-        public ITagRepository Tags { get; }
+        public ITagRepository TagRepository { get; }
 
-        public IStatusRepository Statuses { get; }
+        public IStatusRepository StatusRepository { get; }
 
         public UnitOfWork(TContext context, ITaskRepository Tasks, ITagRepository Tags, IStatusRepository Statuses)
         {
             _context = context;
-            this.Tasks = Tasks;
-            this.Tags = Tags;
-            this.Statuses = Statuses;
+            this.TaskRepository = Tasks;
+            this.TagRepository = Tags;
+            this.StatusRepository = Statuses;
         }
 
         public async Task SaveChangesAsync()

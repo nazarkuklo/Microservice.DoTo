@@ -24,7 +24,7 @@ namespace Microservice.TaskManagement.Application.CommandHandlers.Status
         public async Task<UpdateStatusCommand> Handle(UpdateStatusCommand request, CancellationToken cancellationToken)
         {
             var entity = _mapper.Map<StatusEntity>(request);
-            var entityResult = await _unitOfWork.Statuses.UpdateAsync(entity);
+            var entityResult = await _unitOfWork.StatusRepository.UpdateAsync(entity);
             await _unitOfWork.SaveChangesAsync();
             var result = _mapper.Map<UpdateStatusCommand>(entityResult);
 

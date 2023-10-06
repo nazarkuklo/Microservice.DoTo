@@ -21,7 +21,7 @@ namespace Microservice.TaskManagement.Application.CommandHandlers.Tag
         }
         public async Task<Unit> Handle(DeleteTagCommand request, CancellationToken cancellationToken)
         {
-           await _unitOfWork.Tags.RemoveAsync(request.Id);
+           await _unitOfWork.TagRepository.RemoveAsync(request.Id);
             await _unitOfWork.SaveChangesAsync();
             return Unit.Value;
         }

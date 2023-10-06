@@ -24,8 +24,8 @@ namespace Microservice.TaskManagement.Application.CommandHandlers.Task
         public async Task<UpdateTaskCommand> Handle(UpdateTaskCommand request, CancellationToken cancellationToken)
         {
             var entity = _mapper.Map<TaskEntity>(request);
-            var entityResult = await _unitOfWork.Tasks.UpdateAsync(entity);
-            var tags = await _unitOfWork.Tasks.GetAsync<TagEntityTaskEntity>(x => x.TaskId == request.Id);
+            var entityResult = await _unitOfWork.TaskRepository.UpdateAsync(entity);
+            var tags = await _unitOfWork.TaskRepository.GetAsync<TagEntityTaskEntity>(x => x.TaskId == request.Id);
             List<TagEntityTaskEntity> listAdd = new List<TagEntityTaskEntity>();
             List<TagEntityTaskEntity> listRemove = new List<TagEntityTaskEntity>();
             foreach (var tag in tags)
@@ -44,11 +44,11 @@ namespace Microservice.TaskManagement.Application.CommandHandlers.Task
             }
             if (listAdd.Count > 0)
             {
-                await _unitOfWork.Tasks.AddRangeAsync(listAdd);
+                await _unitOfWork.TaskRepository.AddRangeAsync(listAdd);
             }
             if (listRemove.Count > 0)
             {
-                await _unitOfWork.Tasks.RemoveRangeAsync(listRemove);
+                await _unitOfWork.TaskRepository.RemoveRangeAsync(listRemove);
             }
             await _unitOfWork.SaveChangesAsync();
             var result = _mapper.Map<UpdateTaskCommand>(entityResult);

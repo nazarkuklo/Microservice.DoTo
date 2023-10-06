@@ -21,7 +21,7 @@ namespace Microservice.TaskManagement.Application.CommandHandlers.Task
         }
         public async Task<Unit> Handle(DeleteTaskCommand request, CancellationToken cancellationToken)
         {
-            await _unitOfWork.Tasks.RemoveAsync(request.Id);
+            await _unitOfWork.TaskRepository.RemoveAsync(request.Id);
             await _unitOfWork.SaveChangesAsync();
             return Unit.Value;
         }

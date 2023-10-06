@@ -10,9 +10,9 @@ namespace Microservice.TaskManagement.Application.Interfaces
 {
     public interface IUnitOfWork
     {
-        ITaskRepository Tasks { get; }
-        ITagRepository Tags { get; }
-        IStatusRepository Statuses { get; }
+        ITaskRepository TaskRepository { get; }
+        ITagRepository TagRepository { get; }
+        IStatusRepository StatusRepository { get; }
 
         Task SaveChangesAsync();
     }
