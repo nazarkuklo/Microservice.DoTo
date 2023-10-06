@@ -14,14 +14,15 @@ namespace Microservice.TaskManagement.Application.CommandHandlers.Task
 {
     class DeleteTaskCommandHandler : ICommandHandler<DeleteTaskCommand>
     {
-        private readonly IRepository<TaskEntity> _repository;
-        public DeleteTaskCommandHandler(IRepository<TaskEntity> repository)
+        private readonly IUnitOfWork _unitOfWork;
+        public DeleteTaskCommandHandler(IUnitOfWork unitOfWork)
         {
-            _repository = repository;
+            _unitOfWork = unitOfWork;
         }
         public async Task<Unit> Handle(DeleteTaskCommand request, CancellationToken cancellationToken)
         {
-            await _repository.RemoveAsync(request.Id);
+            await _unitOfWork.TaskRepository.RemoveAsync(request.Id);
+            await _unitOfWork.SaveChangesAsync();
             return Unit.Value;
         }
     }

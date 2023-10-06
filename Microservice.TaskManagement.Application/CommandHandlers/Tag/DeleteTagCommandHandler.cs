@@ -14,14 +14,15 @@ namespace Microservice.TaskManagement.Application.CommandHandlers.Tag
 {
     public class DeleteTagCommandHandler : ICommandHandler<DeleteTagCommand>
     {
-        private readonly IRepository<TagEntity> _repository;
-        public DeleteTagCommandHandler(IRepository<TagEntity> repository)
+        private readonly IUnitOfWork _unitOfWork;
+        public DeleteTagCommandHandler(IUnitOfWork unitOfWork)
         {
-            _repository = repository;
+            _unitOfWork = unitOfWork;
         }
         public async Task<Unit> Handle(DeleteTagCommand request, CancellationToken cancellationToken)
         {
-           await _repository.RemoveAsync(request.Id);
+           await _unitOfWork.TagRepository.RemoveAsync(request.Id);
+            await _unitOfWork.SaveChangesAsync();
             return Unit.Value;
         }
     }

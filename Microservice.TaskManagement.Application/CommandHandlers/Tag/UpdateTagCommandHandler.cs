@@ -14,17 +14,18 @@ namespace Microservice.TaskManagement.Application.CommandHandlers.Tag
 {
     public class UpdateTagCommandHandler : ICommandHandler<UpdateTagCommand, UpdateTagCommand>
     {
-        private readonly IRepository<TagEntity> _repository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        public UpdateTagCommandHandler(IRepository<TagEntity> repository, IMapper mapper)
+        public UpdateTagCommandHandler(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            _repository = repository;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
         public async Task<UpdateTagCommand> Handle(UpdateTagCommand request, CancellationToken cancellationToken)
         {
             var entity = _mapper.Map<TagEntity>(request);
-            var entityResult = await _repository.UpdateAsync(entity);
+            var entityResult = await _unitOfWork.TagRepository.UpdateAsync(entity);
+            await _unitOfWork.SaveChangesAsync();
             var result = _mapper.Map<UpdateTagCommand>(entityResult);
 
             return result;

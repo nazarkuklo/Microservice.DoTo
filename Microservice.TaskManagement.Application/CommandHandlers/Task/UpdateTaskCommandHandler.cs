@@ -14,18 +14,18 @@ namespace Microservice.TaskManagement.Application.CommandHandlers.Task
 {
     public class UpdateTaskCommandHandler : ICommandHandler<UpdateTaskCommand, UpdateTaskCommand>
     {
-        private readonly IRepository<TaskEntity> _repository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        public UpdateTaskCommandHandler(IRepository<TaskEntity> repository, IMapper mapper)
+        public UpdateTaskCommandHandler(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            _repository = repository;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
         public async Task<UpdateTaskCommand> Handle(UpdateTaskCommand request, CancellationToken cancellationToken)
         {
             var entity = _mapper.Map<TaskEntity>(request);
-            var entityResult = await _repository.UpdateAsync(entity);
-            var tags = await _repository.GetAsync<TagEntityTaskEntity>(x => x.TaskId == request.Id);
+            var entityResult = await _unitOfWork.TaskRepository.UpdateAsync(entity);
+            var tags = await _unitOfWork.TaskRepository.GetAsync<TagEntityTaskEntity>(x => x.TaskId == request.Id);
             List<TagEntityTaskEntity> listAdd = new List<TagEntityTaskEntity>();
             List<TagEntityTaskEntity> listRemove = new List<TagEntityTaskEntity>();
             foreach (var tag in tags)
@@ -44,12 +44,13 @@ namespace Microservice.TaskManagement.Application.CommandHandlers.Task
             }
             if (listAdd.Count > 0)
             {
-                await _repository.AddRangeAsync(listAdd);
+                await _unitOfWork.TaskRepository.AddRangeAsync(listAdd);
             }
             if (listRemove.Count > 0)
             {
-                await _repository.RemoveRangeAsync(listRemove);
+                await _unitOfWork.TaskRepository.RemoveRangeAsync(listRemove);
             }
+            await _unitOfWork.SaveChangesAsync();
             var result = _mapper.Map<UpdateTaskCommand>(entityResult);
 
             return result;
